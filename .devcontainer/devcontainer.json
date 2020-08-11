@@ -35,7 +35,7 @@
 	],
 
 	// source=/mnt/c/Users/ferzm/project/src/,target=/root/ferzm/,type=bind,consistency=cached
-	"workspaceMount": "source=c:/Users/ferzm/project/src/,target=/root/ws/src/,type=bind,consistency=cached",
+	"workspaceMount": "source=c:/Users/ferzm/rosdev/src/,target=/root/ws/src/,type=bind,consistency=cached",
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
@@ -57,5 +57,5 @@
 	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
 	// "remoteUser": "vscode"
 
-	"workspaceFolder": "/root/project/src"
+	"workspaceFolder": "/root/ws/src"
 }
