@@ -1,0 +1,61 @@
+// For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.128.0/containers/docker-existing-dockerfile
+{
+	"name": "ROS-Ubuntu Dev",
+
+	// Sets the run context to one level up instead of the .devcontainer folder.
+	// "context": ".."
+	"context": "..",
+
+	// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
+	// "dockerFile": "dev.Dockerfile",
+	"dockerFile": "Dockerfile",
+
+
+	// Set *default* container specific settings.json values on container create.
+	"settings": { 
+		"terminal.integrated.shell.linux": "/bin/bash",
+		// "python.pythonPath": "/usr/local/bin/python",
+		"python.linting.pylintEnabled": true,
+		"python.linting.enabled": true
+	},
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"ms-vscode.cpptools",
+		"ms-python.python",
+		"twxs.cmake",
+		"ms-azuretools.vscode-docker",
+		"eamodio.gitlens",
+		"ms-vscode.powershel",
+		"matklad.rust-analyzer",
+		"visualstudioexptteam.vscodeintellicode",
+		"redhat.vscode-yaml",
+		"vsciot-vscode.vscode-arduino"
+	],
+
+	// source=/mnt/c/Users/ferzm/project/src/,target=/root/ferzm/,type=bind,consistency=cached
+	"workspaceMount": "source=c:/Users/ferzm/project/src/,target=/root/ws/src/,type=bind,consistency=cached",
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Uncomment the next line to run commands after the container is created - for example installing curl.
+	// "postCreateCommand": "apt-get update && apt-get install -y curl",
+
+	// Uncomment when using a ptrace-based debugger like C++, Go, and Rust
+	// "runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
+	"runArgs": [
+		"--net", "host",
+		"-e", "QT_GRAPHICSSYSTEM=native"
+	],
+
+	// Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker.
+	// "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" ],
+	// "mounts": [ "source=c:/Users/ferzm/project/src/,target=/root/ferzm/project/src/,type=bind,consistency=cached" ],
+
+	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
+	// "remoteUser": "vscode"
+
+	"workspaceFolder": "/root/project/src"
+}
