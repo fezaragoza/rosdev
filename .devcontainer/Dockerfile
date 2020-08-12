@@ -16,7 +16,20 @@ RUN apt install -y libzmq3-dev \
                     libeigen3-dev \
                     cmake \
                     vim \
-                    gdb
+                    gdb \
+                    lsb-core \
+                    wget
+
+RUN /bin/bash -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
+RUN wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
+RUN apt update
+
+RUN apt install -y  gazebo9 \
+                    libgazebo9-dev \
+                    ros-melodic-gazebo-ros \
+                    ros-melodic-gazebo-plugins \
+                    ros-melodic-gazebo-ros-pkgs \
+                    ros-melodic-gazebo-ros-control
 
 RUN apt install -y  ros-melodic-ackermann-msgs \
                     ros-melodic-map-server \
@@ -29,7 +42,7 @@ RUN sudo rosdep fix-permissions
 
 RUN rosdep update
 
-RUN curl -sSL http://get.gazebosim.org | sh
+# RUN curl -sSL http://get.gazebosim.org | sh
 
 RUN cp -r /usr/include/eigen3/Eigen /usr/include
 
@@ -84,6 +97,15 @@ RUN cd $HOME/catkin_ws/src && \
     git clone --recurse-submodules https://github.com/ros-drivers/rosserial.git
 
 RUN /bin/bash -c "source /opt/ros/melodic/setup.bash; cd ~/catkin_ws; catkin_make; catkin_make install"
+
+RUN cd $HOME/catkin_ws/src && \
+    git clone --recurse-submodules https://github.com/ROBOTIS-GIT/turtlebot3.git && \
+    git clone --recurse-submodules https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git && \
+    git clone --recurse-submodules https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git && \
+    git clone --recurse-submodules https://github.com/ROBOTIS-GIT/turtlebot3_autorace.git
+
+RUN /bin/bash -c "source /opt/ros/melodic/setup.bash; cd ~/catkin_ws; rosdep install --from-path src -i -y; \
+                catkin_make; source devel/setup.bash; rospack profile"
 
 
 COPY ./start.sh $HOME/

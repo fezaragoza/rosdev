@@ -31,7 +31,9 @@
 		"matklad.rust-analyzer",
 		"visualstudioexptteam.vscodeintellicode",
 		"redhat.vscode-yaml",
-		"vsciot-vscode.vscode-arduino"
+		"vsciot-vscode.vscode-arduino",
+		"ms-iot.vscode-ros",
+		"smilerobotics.urdf"
 	],
 
 	// source=/mnt/c/Users/ferzm/project/src/,target=/root/ferzm/,type=bind,consistency=cached
