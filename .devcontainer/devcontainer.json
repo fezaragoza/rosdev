@@ -15,7 +15,7 @@
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
 		"terminal.integrated.shell.linux": "/bin/bash",
-		// "python.pythonPath": "/usr/local/bin/python",
+		"python.pythonPath": "/usr/local/bin/python",
 		"python.linting.pylintEnabled": true,
 		"python.linting.enabled": true
 	},
@@ -33,11 +33,12 @@
 		"redhat.vscode-yaml",
 		"vsciot-vscode.vscode-arduino",
 		"ms-iot.vscode-ros",
-		"smilerobotics.urdf"
+		"smilerobotics.urdf",
+		"ms-vsliveshare.vsliveshare"
 	],
 
 	// source=/mnt/c/Users/ferzm/project/src/,target=/root/ferzm/,type=bind,consistency=cached
-	"workspaceMount": "source=c:/Users/ferzm/rosdev/src/,target=/root/ws/src/,type=bind,consistency=cached",
+	"workspaceMount": "source=c:/Users/ferzm/rosdev/src/ros_wall_follower/,target=/catkin_ws/src/ros_wall_follower/,type=bind,consistency=cached",
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
@@ -49,15 +50,21 @@
 	// "runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
 	"runArgs": [
 		"--net", "host",
-		"-e", "QT_GRAPHICSSYSTEM=native"
+		"-e", "QT_GRAPHICSSYSTEM=native",
+		// "-v", "/mnt/c/Users/ferzm/rosdev/src/laser_sensor/:/catkin_ws/src/laser_sensor/"
 	],
 
 	// Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker.
 	// "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" ],
-	// "mounts": [ "source=c:/Users/ferzm/project/src/,target=/root/ferzm/project/src/,type=bind,consistency=cached" ],
+	"mounts": [ 
+		// "source=c:/Users/ferzm/rosdev/src/laser_sensor/,target=/catkin_ws/src/laser_sensor/,type=bind,consistency=cached",
+		"source=c:/Users/ferzm/rosdev/src/location_monitor/,target=/catkin_ws/src/location_monitor/,type=bind,consistency=cached",
+		"source=c:/Users/ferzm/rosdev/src/laser_scan/,target=/catkin_ws/src/laser_scan/,type=bind,consistency=cached",
+		"source=c:/Users/ferzm/rosdev/src/drive_car/,target=/catkin_ws/src/drive_car/,type=bind,consistency=cached",
+	],
 
 	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
 	// "remoteUser": "vscode"
 
-	"workspaceFolder": "/root/ws/src"
+	"workspaceFolder": "/catkin_ws/src"
 }

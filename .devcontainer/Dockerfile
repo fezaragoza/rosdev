@@ -70,7 +70,10 @@ RUN pip install numpy==1.16.0 \
                 protobuf==3.8.0 \
                 pyyaml \
                 llvmlite==0.31.0 \
-                numba==0.47.0
+                numba==0.47.0 \
+                pylint \
+                autopep8 \
+                pandas
 
 RUN mkdir /f1tenth_gym
 COPY ./f1tenth_gym_ros/f1tenth_gym /f1tenth_gym
@@ -115,5 +118,5 @@ RUN echo "source ~/start.sh" >> ~/.bashrc
 
 # CMD ["roslaunch", "package file.launch"]
 
-WORKDIR $HOME/ws
+WORKDIR /catkin_ws/src
 CMD [ "/bin/bash" ]

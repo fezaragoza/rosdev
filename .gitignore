@@ -1,3 +1,6 @@
 .vscode/
 f1tenth_gym_ros/
 src/
+vscode_ros/
+wall_follower_extra/
+ackermann_p_node.py
