@@ -97,7 +97,9 @@ COPY ./f1tenth_gym_ros /catkin_ws/src/f1tenth_gym_ros
 RUN /bin/bash -c "source /opt/ros/melodic/setup.bash; cd /catkin_ws; catkin_make; source devel/setup.bash"
 
 RUN cd /catkin_ws/src && \
-    git clone --recurse-submodules https://github.com/ros-drivers/rosserial.git
+    git clone --recurse-submodules https://github.com/ros-drivers/rosserial.git && \
+    cd rosserial && \
+    git checkout melodic-devel
 
 RUN /bin/bash -c "source /opt/ros/melodic/setup.bash; cd /catkin_ws; catkin_make; catkin_make install"
 
@@ -117,6 +119,53 @@ COPY ./start.sh $HOME/
 RUN echo "source ~/start.sh" >> ~/.bashrc
 
 # CMD ["roslaunch", "package file.launch"]
+
+# SLAM HECTOR
+RUN apt install -y tmux \
+                    qt4-default
+
+RUN cd /catkin_ws/src && \
+    git clone --recurse-submodules https://github.com/tu-darmstadt-ros-pkg/hector_slam.git
+
+RUN /bin/bash -c "source /opt/ros/melodic/setup.bash; cd /catkin_ws; catkin_make; source devel/setup.bash" 
+
+COPY ./mapping_default.launch /catkin_ws/src/hector_slam/hector_mapping/launch/
+COPY ./tutorial.launch /catkin_ws/src/hector_slam/hector_slam_launch/launch/
+
+# SAVE MAP
+RUN apt install -y libsdl-dev \
+                    libsdl-image1.2-dev
+
+RUN cd /catkin_ws/src && \
+    git clone --recurse-submodules https://github.com/ros-planning/navigation.git && \
+    cd navigation && \
+    git checkout melodic-devel
+
+# RUN /bin/bash -c "source /opt/ros/melodic/setup.bash; cd /catkin_ws; catkin_make; source devel/setup.bash" 
+
+RUN cd /catkin_ws/src && \
+    git clone --recurse-submodules https://github.com/ros/geometry2.git && \
+    cd geometry2 && \
+    git checkout melodic-devel
+
+# RUN /bin/bash -c "source /opt/ros/melodic/setup.bash; cd /catkin_ws; catkin_make; source devel/setup.bash" 
+
+RUN cd /catkin_ws/src && \
+    git clone --recurse-submodules https://github.com/ros-planning/navigation_msgs.git
+
+# RUN /bin/bash -c "source /opt/ros/melodic/setup.bash; cd /catkin_ws; catkin_make; source devel/setup.bash" 
+
+RUN cd /catkin_ws/src && \
+    git clone --recurse-submodules https://github.com/ros-perception/openslam_gmapping.git && \
+    cd openslam_gmapping && \
+    git checkout melodic-devel
+
+RUN cd /catkin_ws/src && \
+    git clone --recurse-submodules https://github.com/ros-perception/slam_gmapping.git && \
+    cd slam_gmapping && \
+    git checkout melodic-devel
+
+RUN /bin/bash -c "source /opt/ros/melodic/setup.bash; cd /catkin_ws; catkin_make; source devel/setup.bash" 
 
 WORKDIR /catkin_ws/src
 CMD [ "/bin/bash" ]
