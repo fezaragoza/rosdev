@@ -112,14 +112,6 @@ RUN cd /catkin_ws/src && \
 RUN /bin/bash -c "source /opt/ros/melodic/setup.bash; cd /catkin_ws; rosdep install --from-path src -i -y; \
                 catkin_make; source devel/setup.bash; rospack profile"
 
-
-COPY ./start.sh $HOME/
-# CMD ["/catkin_ws/src/f1tenth_gym_ros/start.sh"]
-# RUN echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
-RUN echo "source ~/start.sh" >> ~/.bashrc
-
-# CMD ["roslaunch", "package file.launch"]
-
 # SLAM HECTOR
 RUN apt install -y tmux \
                     qt4-default
@@ -166,6 +158,14 @@ RUN cd /catkin_ws/src && \
     git checkout melodic-devel
 
 RUN /bin/bash -c "source /opt/ros/melodic/setup.bash; cd /catkin_ws; catkin_make; source devel/setup.bash" 
+
+
+COPY ./start.sh $HOME/
+# CMD ["/catkin_ws/src/f1tenth_gym_ros/start.sh"]
+# RUN echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
+RUN echo "source ~/start.sh" >> ~/.bashrc
+
+# CMD ["roslaunch", "package file.launch"]
 
 WORKDIR /catkin_ws/src
 CMD [ "/bin/bash" ]
