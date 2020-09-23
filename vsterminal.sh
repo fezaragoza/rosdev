@@ -1,2 +1,2 @@
 #!/bin/bash
-docker exec -it interesting_hermann bash
+docker exec -it sleepy_faraday bash

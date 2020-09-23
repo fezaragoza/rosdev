@@ -11,7 +11,7 @@
 	// "dockerFile": "dev.Dockerfile",
 	"dockerFile": "Dockerfile",
 
-
+	"remoteUser": "ferzm", 
 	// Set *default* container specific settings.json values on container create.
 	"settings": { 
 		"terminal.integrated.shell.linux": "/bin/bash",
@@ -27,18 +27,19 @@
 		"twxs.cmake",
 		"ms-azuretools.vscode-docker",
 		"eamodio.gitlens",
-		"ms-vscode.powershel",
+		"ms-vscode.powershell",
 		"matklad.rust-analyzer",
 		"visualstudioexptteam.vscodeintellicode",
 		"redhat.vscode-yaml",
 		"vsciot-vscode.vscode-arduino",
 		"ms-iot.vscode-ros",
 		"smilerobotics.urdf",
-		"ms-vsliveshare.vsliveshare"
+		"ms-vsliveshare.vsliveshare",
+		"ms-python.vscode-pylance"
 	],
 
 	// source=/mnt/c/Users/ferzm/project/src/,target=/root/ferzm/,type=bind,consistency=cached
-	"workspaceMount": "source=c:/Users/ferzm/rosdev/src/ros_wall_follower/,target=/catkin_ws/src/ros_wall_follower/,type=bind,consistency=cached",
+	"workspaceMount": "source=/home/ferzm/rosdev/nodes/ros_wall_follower/,target=/home/ferzm/catkin_ws/src/ros_wall_follower/,type=bind,consistency=cached",
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
@@ -49,22 +50,29 @@
 	// Uncomment when using a ptrace-based debugger like C++, Go, and Rust
 	// "runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
 	"runArgs": [
-		"--net", "host",
-		"-e", "QT_GRAPHICSSYSTEM=native",
+		"--privileged",
+		"--rm",
+		"--gpus", "all",
+		"--net=host",
+		"--runtime=nvidia",
+		"-e", "DISPLAY=:1",
+		// "-v", "/tmp/.X11-unix:/tmp/.X11-unix",
+		// "--user", "$(id -u):$(id -g)"
 		// "-v", "/mnt/c/Users/ferzm/rosdev/src/laser_sensor/:/catkin_ws/src/laser_sensor/"
 	],
 
 	// Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker.
 	// "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" ],
 	"mounts": [ 
+		"source=/tmp/.X11-unix/,target=/tmp/.X11-unix/,type=bind,consistency=cached"
 		// "source=c:/Users/ferzm/rosdev/src/laser_sensor/,target=/catkin_ws/src/laser_sensor/,type=bind,consistency=cached",
-		"source=c:/Users/ferzm/rosdev/src/location_monitor/,target=/catkin_ws/src/location_monitor/,type=bind,consistency=cached",
-		"source=c:/Users/ferzm/rosdev/src/laser_scan/,target=/catkin_ws/src/laser_scan/,type=bind,consistency=cached",
-		"source=c:/Users/ferzm/rosdev/src/drive_car/,target=/catkin_ws/src/drive_car/,type=bind,consistency=cached",
+		// "source=c:/Users/ferzm/rosdev/src/location_monitor/,target=/catkin_ws/src/location_monitor/,type=bind,consistency=cached",
+		// "source=c:/Users/ferzm/rosdev/src/laser_scan/,target=/catkin_ws/src/laser_scan/,type=bind,consistency=cached",
+		// "source=c:/Users/ferzm/rosdev/src/drive_car/,target=/catkin_ws/src/drive_car/,type=bind,consistency=cached",
 	],
 
 	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
 	// "remoteUser": "vscode"
 
-	"workspaceFolder": "/catkin_ws/src"
+	"workspaceFolder": "/home/ferzm/catkin_ws/src"
 }
