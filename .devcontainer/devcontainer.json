@@ -64,7 +64,9 @@
 	// Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker.
 	// "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" ],
 	"mounts": [ 
-		"source=/tmp/.X11-unix/,target=/tmp/.X11-unix/,type=bind,consistency=cached"
+		"source=/tmp/.X11-unix/,target=/tmp/.X11-unix/,type=bind,consistency=cached",
+		"source=/home/ferzm/rosdev/PythonRobotics/,target=/home/ferzm/catkin_ws/src/PythonRobotics/,type=bind,consistency=cached",
+		"source=/home/ferzm/rosdev/iros2020_docker/nsh_iros2020/,target=/home/ferzm/catkin_ws/src/nsh_iros2020/,type=bind,consistency=cached"
 		// "source=c:/Users/ferzm/rosdev/src/laser_sensor/,target=/catkin_ws/src/laser_sensor/,type=bind,consistency=cached",
 		// "source=c:/Users/ferzm/rosdev/src/location_monitor/,target=/catkin_ws/src/location_monitor/,type=bind,consistency=cached",
 		// "source=c:/Users/ferzm/rosdev/src/laser_scan/,target=/catkin_ws/src/laser_scan/,type=bind,consistency=cached",

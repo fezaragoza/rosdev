@@ -4,3 +4,6 @@ src/
 vscode_ros/
 wall_follower_extra/
 ackermann_p_node.py
+nodes/
+PythonRobotics/
+iros2020_docker/

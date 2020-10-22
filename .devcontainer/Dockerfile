@@ -186,7 +186,7 @@ RUN echo "source ~/start_ub.sh" >> ~/.bashrc
 ENV NVIDIA_VISIBLE_DEVICES all
 ENV NVIDIA_DRIVER_CAPABILITIES compute,compat32,graphics,utility,video,display
 
-COPY --chown=$USERNAME ./modif_ros/params.yaml $HOME/f1tenth_gym_ros/
+COPY --chown=$USERNAME ./modif_ros/params.yaml $HOME/catkin_ws/src/f1tenth_gym_ros/
 
 RUN sudo apt install -y libcanberra-gtk* \
                         python-opencv

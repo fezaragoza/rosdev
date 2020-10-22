@@ -4,7 +4,7 @@ nvidia-docker run --privileged --rm --gpus all -it --name=rosdev_container --net
             --runtime=nvidia \
             -e DISPLAY=$DISPLAY \
             -v /tmp/.X11-unix:/tmp/.X11-unix \
-            -v /home/ferzm/rosdev/src/ros_wall_follower/:/home/ferzm/catkin_ws/src/ros_wall_follower/ \
+            -v /home/ferzm/rosdev/nodes/ros_wall_follower/:/home/ferzm/catkin_ws/src/ros_wall_follower/ \
             --user $(id -u):$(id -g)\
             rosdev:latest
             # -v /home/ferzm/rosdev/src/location_monitor/:/home/ferzm/catkin_ws/src/location_monitor/ \
