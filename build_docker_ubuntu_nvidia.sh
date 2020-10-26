@@ -16,4 +16,4 @@ fi
 cd ../
 echo "Building Docker Image..."
 
-docker build -t rosdev:latest -f ./.devcontainer/Dockerfile .
+nvidia-docker build -t rosdev:latest -f ./.devcontainer/Dockerfile .

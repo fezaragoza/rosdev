@@ -1,6 +1,7 @@
 #!/bin/bash
 xhost +local:docker
-docker run --privileged --rm -it --name=rosdev_container --net=host \
+nvidia-docker run --privileged --rm --gpus all -it --name=rosdev_container --net=host \
+            --runtime=nvidia \
             -e DISPLAY=$DISPLAY \
             -v /tmp/.X11-unix:/tmp/.X11-unix \
             -v /home/ferzm/rosdev/src/ros_wall_follower/:/home/ferzm/catkin_ws/src/ros_wall_follower/ \
